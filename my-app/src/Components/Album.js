@@ -1,5 +1,6 @@
 import {React,  useRef, useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import { BsFillPlayCircleFill} from "react-icons/bs"
 
 
 function Album(prop){
@@ -126,13 +127,13 @@ return (
 {CollectionComp}
 </div>
 
-<div className="LikedDiv" ref={likeref}>
+<div className="LikedDiv px-2" ref={likeref}>
     <div className="d-lg-flex d-block gap-5 align-content-center">
     <img className="liked-image mt-2 img-fluid" src="https://media.istockphoto.com/photos/young-pink-hair-girl-listening-music-in-headphones-picture-id1300324580?b=1&k=20&m=1300324580&s=170667a&w=0&h=csNLv_RqHxnWMsuzIIEGqCS_Wz9_OmrGXcOSIiyxwj4="></img>
     <div className="d-block align-self-center">
     <p>Liked Songs</p>
     <p>N of songs in array</p>
-    <p>Play all</p>
+    <button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
     </div>
     </div>
 </div>

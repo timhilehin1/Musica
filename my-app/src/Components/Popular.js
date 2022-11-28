@@ -5,8 +5,8 @@ function Popular(prop){
     const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex, popular, SetPopular, IdChecker,SetIdChecker, PlayBtnRef, PauseBtnRef, AudioRef, random, SetRandom, rotate,  SetRotate, AllSongs, SetAllSongs} = prop
 
        let PopularCard
-    //    let newData = []
     const AudioEl = useRef(null)
+    let updatedPopularData = []
 
 
 
@@ -20,10 +20,8 @@ function Popular(prop){
 
                 SetRotate(false)
 
-// AudioEl.current.play()
 
         setCurrentSongIndex(index)
-        // console.log(currentSongIndex)
              SetRandom(id)
             SetIdChecker(id.substr(0,7))
 
@@ -31,20 +29,30 @@ function Popular(prop){
                   SetAllSongs(popular)
             }
 
-        console.log(AllSongs)
-        console.log(popular)
+    
+ 
+    }
 
-        // for(let i = 0; i<Popular.length; i++){
-        //    if(Popular[i].id === id){
-        //         console.log("it's gone")
-        //         let PlayerObject = {
-        //             ...Popular[i]
-        //         }
-        //         newData.push(PlayerObject)
-        //         prop.SetPlayerData(newData)
-        //    }
-        // }
-        // console.log(prop.PlayerData)
+    function handleLike(id){
+          SetPopular((prevData)=>{
+              prevData.forEach((item)=>{
+                  if(item.id === id){
+                      const updatedData = {
+                          ...item,
+                          like: !item.like
+                      }
+
+                      updatedPopularData.push(updatedData)
+                  }
+
+                  else{
+                      updatedPopularData.push(item)
+                  }
+
+              })
+
+              return updatedPopularData
+          })
     }
 
 
@@ -54,11 +62,13 @@ function Popular(prop){
             return (
              <PopularMusic
              key={item.id}
-              SongTitle={item.title}
+             SongTitle={item.title}
              Artist={item.artist}
-            Cover={item.cover}
-           mp3={item.audio}
-            handlePlay={()=>{handlePlay(item.id,index)}}/>
+             Cover={item.cover}
+             mp3={item.audio}
+             like={item.like}
+             handleLike={()=>handleLike(item.id)}
+             handlePlay={()=>{handlePlay(item.id,index)}}/>
             )
         })
     }

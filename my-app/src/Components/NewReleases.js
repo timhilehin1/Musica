@@ -2,40 +2,61 @@ import  { React, useState, useEffect, useRef } from "react";
 import NewMusic from "./NewMusic";
 import { Link } from "react-router-dom";
 import { AiOutlinePause } from "react-icons/ai"
+import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md"
 
 function NewReleases(prop){
+
 
 const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex, IdChecker,SetIdChecker, PlayBtnRef, PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom, AllSongs, SetAllSongs} = prop
 
 
 
+let NewMusicCard
+let updatedNewRelease= []
+
+
+            function handlePlay(id, index){
+                AudioRef.current.load()
+                AudioRef.current.play()
+
+                PlayBtnRef.current.style.display = "none"
+                PauseBtnRef.current.style.display = "block"
+                SetRotate(false)
 
 
 
 
-   let NewMusicCard
-   let newData = []
+                  setCurrentSongIndex(index)
+                //   console.log(currentSongIndex)
+                  SetIdChecker(id.substr(0,3))
+                  SetRandom(id)
+
+                   if(id.substr(0,3)){
+                       SetAllSongs(newRelease)
+                   }
+
+            }
 
 
+            function handleLike(id){
+             SetnewRelease((prevData)=>{
+                 prevData.forEach((item)=>{
+                    if(item.id === id){
 
-    function handlePlay(id, index){
-        AudioRef.current.load()
-        AudioRef.current.play()
+                         const updatedData = {
+                             ...item,
+                             like: !item.like
+                         }
+                         updatedNewRelease.push(updatedData)
+                     }
 
-        PlayBtnRef.current.style.display = "none"
-        PauseBtnRef.current.style.display = "block"
-        SetRotate(false)
+                     else{
+                        updatedNewRelease.push(item)
+                         }
+                 })
 
-
-        setCurrentSongIndex(index)
-        SetIdChecker(id.substr(0,3))
-        SetRandom(id)
-
-        if(id.substr(0,3)){
-            SetAllSongs(newRelease)
-        }
-
-
+                 return updatedNewRelease
+             })
             }
 
 
@@ -53,9 +74,10 @@ if(newRelease){
         Cover={item.cover}
         Audio={item.audio}
         handlePlay = {()=>{handlePlay(item.id, index)}}
+        handleLike={()=>handleLike(item.id)}
+        like={item.like}
         AudioRef={ prop.AudioRef}
-        like={"like"}
-        handlelike={"handlelike"}
+
 
 
         />

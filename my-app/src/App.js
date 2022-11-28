@@ -53,16 +53,21 @@ function App() {
 
     fetch('https://musica-api.onrender.com/new')
         .then(response => response.json())
-        .then(response => SetnewRelease(response))
+        .then(response => SetnewRelease(response.map((item)=>{
+          return {...item, like:false}
+        })))
         .catch(err => console.error(err));
 
         },[])
+        
 
         useEffect(()=>{
 
           fetch('https://musica-api.onrender.com/popular')
               .then(response => response.json())
-              .then(response => SetPopular(response))
+              .then(response => SetPopular(response.map((item)=>{
+                return {...item, like:false}
+              })))
               .catch(err => console.error(err));
 
               },[])
@@ -74,8 +79,6 @@ function App() {
                 .then(response=>SetPlaylistData(response))
                 .catch(error=>console.log(error))
               },[])
-
-
 
 
       const PlayerRef = useRef()
