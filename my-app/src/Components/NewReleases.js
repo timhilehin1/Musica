@@ -7,7 +7,10 @@ import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md"
 function NewReleases(prop){
 
 
-const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex, IdChecker,SetIdChecker, PlayBtnRef, PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom, AllSongs, SetAllSongs} = prop
+const{ newRelease, SetnewRelease,
+currentSongIndex, setCurrentSongIndex, IdChecker,SetIdChecker, PlayBtnRef,
+ PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom,
+  AllSongs, SetAllSongs, LikedPlaylist, setLikedPlaylist} = prop
 
 
 
@@ -22,8 +25,6 @@ let updatedNewRelease= []
                 PlayBtnRef.current.style.display = "none"
                 PauseBtnRef.current.style.display = "block"
                 SetRotate(false)
-
-
 
 
                   setCurrentSongIndex(index)

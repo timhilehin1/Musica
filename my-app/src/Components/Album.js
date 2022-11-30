@@ -1,13 +1,16 @@
 import {React,  useRef, useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlayCircleFill} from "react-icons/bs"
+import PlaylistSongs from "./PlaylistSongs";
 
 
 function Album(prop){
 
-const {CollectionData, SetCollectionData, FinalPlaylist, SetFinalPlaylist,  SetPlaylistIndex, PlaylistIndex, mine, setmine} = prop
+const {CollectionData, SetCollectionData, FinalPlaylist, SetFinalPlaylist,  SetPlaylistIndex, PlaylistIndex, mine, newRelease, setmine} = prop
 
+console.log(newRelease)
 const [localArray, setLocalArray] = useState([])
+const [likeArray, setLikeArray] = useState([])
 const [test, setTest] = useState()
 const [pageWidth, setPageWidth] = useState(getWindowSize())
 let colRef = useRef();
@@ -55,10 +58,26 @@ useEffect(()=>{
              localArray.splice(i,1)
             }
 
-
         }
+
+        for(let i=0; i<newRelease.length; i++){
+            if(newRelease[i].like === true){
+              likeArray.push(newRelease[i])
+            }
+
+            else if(newRelease[i] === false){
+                likeArray.splice(i,1)
+            }
+        }
+
+
         setTest(localArray)
     },[FinalPlaylist])
+
+// console.log(likeArray)
+    // useEffect(()=>{
+
+    // },[rel])
 
 
 
@@ -105,6 +124,26 @@ return (
 )
 })
 
+const likedSongs = likeArray.map((item)=>{
+    return (
+         <>
+         <PlaylistSongs
+           cover={item.cover}
+           duration={item.duration}
+           artist={item.artist}
+           title={item.title}
+           audio={item.audio}
+            // AllSongs={AllSongs}
+            // SetAllSongs={SetAllSongs}
+            // handlePlaylistSong={()=>handlePlaylistSong(index)}
+
+           />
+         </>
+    )
+})
+
+
+
 
 return (
 
@@ -115,19 +154,19 @@ return (
 
 </div>
 
-{localArray.length <= 0 ?
+{/* {localArray.length <= 0 ? */}
 
-<p className="mt-2">Add your Playlists from Homepage</p>
+{/* <p className="mt-2">Add your Playlists from Homepage</p>
 
-:
+: */}
 
-<div className="">
+<div className="general">
 
 <div className="collectionDiv gap-5 px-3 " ref={colRef}>
 {CollectionComp}
 </div>
 
-<div className="LikedDiv px-2" ref={likeref}>
+<div className="LikedDiv d-block w-100 px-2" ref={likeref}>
     <div className="d-lg-flex d-block gap-5 align-content-center">
     <img className="liked-image mt-2 img-fluid" src="https://media.istockphoto.com/photos/young-pink-hair-girl-listening-music-in-headphones-picture-id1300324580?b=1&k=20&m=1300324580&s=170667a&w=0&h=csNLv_RqHxnWMsuzIIEGqCS_Wz9_OmrGXcOSIiyxwj4="></img>
     <div className="d-block align-self-center">
@@ -136,12 +175,17 @@ return (
     <button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
     </div>
     </div>
+
+    <div className="">
+    {likedSongs}
+</div>
+</div>
+
 </div>
 
 
-</div>
 
-}
+{/* } */}
 
 </div>
     )

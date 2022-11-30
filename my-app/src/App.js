@@ -37,6 +37,7 @@ function App() {
    const [CollectionData, SetCollectionData] = useState()
    const[mine, setmine] = useState()
    const [playListID, setplayListID] = useState()
+   const [LikedPlaylist, setLikedPlaylist] = useState([])
 
 
       const [FinalPlaylist, SetFinalPlaylist] = useState(JSON.parse(sessionStorage.getItem("data")) || [])
@@ -59,7 +60,7 @@ function App() {
         .catch(err => console.error(err));
 
         },[])
-        
+
 
         useEffect(()=>{
 
@@ -115,6 +116,9 @@ function App() {
         SetRandom={SetRandom}
         AllSongs={AllSongs}
         SetAllSongs={SetAllSongs}
+        LikedPlaylist={LikedPlaylist}
+        setLikedPlaylist={setLikedPlaylist}
+
 
 
         />
@@ -136,6 +140,8 @@ function App() {
         SetAllSongs={SetAllSongs}
         rotate={rotate}
         SetRotate={SetRotate}
+        LikedPlaylist={LikedPlaylist}
+        setLikedPlaylist={setLikedPlaylist}
 
 
         />
@@ -196,6 +202,7 @@ function App() {
                                               SetPlaylistIndex={SetPlaylistIndex}
                                               mine={mine}
                                               setmine={setmine}
+                                              newRelease={newRelease}
 
                                              />}/>
             </Route>
@@ -211,15 +218,15 @@ function App() {
                                                       SetAllSongs={SetAllSongs}
                                                       Plsongs={Plsongs}
                                                       SetPlSongs={SetPlSongs}
-                                                    currentSongIndex={currentSongIndex}
-                                                    setCurrentSongIndex={setCurrentSongIndex}
-                                                    AudioRef={AudioRef}
-                                                    PlayBtnRef={PlayBtnRef}
-                                                    PauseBtnRef={PauseBtnRef}
-                                                    rotate={rotate}
-                                                    SetRotate={SetRotate}
-                                                    playListID={ playListID}
-                                                    setplayListID={setplayListID}
+                                                      currentSongIndex={currentSongIndex}
+                                                      setCurrentSongIndex={setCurrentSongIndex}
+                                                      AudioRef={AudioRef}
+                                                      PlayBtnRef={PlayBtnRef}
+                                                      PauseBtnRef={PauseBtnRef}
+                                                      rotate={rotate}
+                                                      SetRotate={SetRotate}
+                                                      playListID={ playListID}
+                                                      setplayListID={setplayListID}
                                                       />}/>
             </Route>
 

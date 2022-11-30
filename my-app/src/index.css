@@ -312,7 +312,7 @@ width: 100%;
 .liked-image{
     border-radius: 25px;
     height: 300px;
-    width: 100%;
+    width: 500px;
 }
 
 
@@ -343,6 +343,14 @@ width: 100%;
 
 .audio {
     background-color: black;
+}
+
+.dashboard-page{
+    border: 1px solid red;
+}
+
+.LikedDiv{
+    border: 1px solid blue;
 }
 
 
