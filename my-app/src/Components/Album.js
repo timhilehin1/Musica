@@ -6,15 +6,20 @@ import PlaylistSongs from "./PlaylistSongs";
 
 function Album(prop){
 
-const {CollectionData, SetCollectionData, FinalPlaylist, SetFinalPlaylist,  SetPlaylistIndex, PlaylistIndex, mine, newRelease, setmine} = prop
+const {CollectionData, SetCollectionData, FinalPlaylist, SetFinalPlaylist,
+SetPlaylistIndex, PlaylistIndex, mine, newRelease, setmine, AllSongs,
+ SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate} = prop
 
-console.log(newRelease)
+// console.log(newRelease)
 const [localArray, setLocalArray] = useState([])
 const [likeArray, setLikeArray] = useState([])
 const [test, setTest] = useState()
 const [pageWidth, setPageWidth] = useState(getWindowSize())
 let colRef = useRef();
 let likeref = useRef();
+let likedSongsdiv = useRef();
+
+
 
 
 
@@ -74,7 +79,7 @@ useEffect(()=>{
         setTest(localArray)
     },[FinalPlaylist])
 
-// console.log(likeArray)
+// console.log(localArray)
     // useEffect(()=>{
 
     // },[rel])
@@ -83,35 +88,56 @@ useEffect(()=>{
 
 
 function handleCollection(){
+
         if(pageWidth > 500){
               colRef.current.style.display = "flex"
               likeref.current.style.display = "none"
+              likedSongsdiv.current.style.display = 'none'
         }
 
         else{
              colRef.current.style.display = "block"
              likeref.current.style.display = "none"
+             likedSongsdiv.current.style.display = 'none'
         }
     }
 
 function handleLike(){
         colRef.current.style.display = "none"
         likeref.current.style.display = "block"
+        likedSongsdiv.current.style.display = 'block'
     }
 
 
-function handleCollectionData(id){
+function handleCollectionPlaylist(id){
     SetPlaylistIndex(id.substr(9)-1)
+}
+
+function PlayLikedSong(index){
+console.log(index)
+}
+
+function handlePlaylistSong(index){
+    console.log(index)
+    SetAllSongs(likeArray)
+    setCurrentSongIndex(index)
+
+    AudioRef.current.load()
+    AudioRef.current.play()
+
+    PlayBtnRef.current.style.display = "none"
+    PauseBtnRef.current.style.display = "block"
+    SetRotate(false)
 }
 
 const CollectionComp = localArray.map((item, index)=>{
 return (
  <>
-<div onClick={()=>handleCollectionData(item.id)} className= "mt-3 " >
+<div onClick={()=>handleCollectionPlaylist(item.id)} className= "mt-3 " >
 <div className="mt-4  d-lg-flex  gap-4">
 <div className="d-block collection-img"  >
 <Link style={{ textDecoration: 'none' }} to='/PlaylistPage' > <img  className="releases small-picture  " src={item.cover}></img>  </Link>
-<div className=" ms-3 title">
+<div className="ms-3 title">
 {item.title}
 {/* <p>{item.title}</p> */}
 </div>
@@ -124,7 +150,7 @@ return (
 )
 })
 
-const likedSongs = likeArray.map((item)=>{
+const likedSongs = likeArray.map((item,index)=>{
     return (
          <>
          <PlaylistSongs
@@ -133,9 +159,10 @@ const likedSongs = likeArray.map((item)=>{
            artist={item.artist}
            title={item.title}
            audio={item.audio}
+        //    PlayLikedSong = {()=>{PlayLikedSong(index)}}
             // AllSongs={AllSongs}
             // SetAllSongs={SetAllSongs}
-            // handlePlaylistSong={()=>handlePlaylistSong(index)}
+            handlePlaylistSong={()=>handlePlaylistSong(index)}
 
            />
          </>
@@ -147,26 +174,23 @@ const likedSongs = likeArray.map((item)=>{
 
 return (
 
-<div className="d-block ">
+<div className="d-block collectionPage">
+
 <div className="mt-5  d-flex button-container gap-lg-5 gap-2">
 <button onClick={handleCollection} className="collection btnn">My Collection</button>
 <button onClick={handleLike} className="likes btnn">Likes</button>
 
 </div>
 
-{/* {localArray.length <= 0 ? */}
 
-{/* <p className="mt-2">Add your Playlists from Homepage</p>
 
-: */}
-
-<div className="general">
 
 <div className="collectionDiv gap-5 px-3 " ref={colRef}>
 {CollectionComp}
 </div>
 
-<div className="LikedDiv d-block w-100 px-2" ref={likeref}>
+<div className="LikedDiv  px-2" ref={likeref}>
+
     <div className="d-lg-flex d-block gap-5 align-content-center">
     <img className="liked-image mt-2 img-fluid" src="https://media.istockphoto.com/photos/young-pink-hair-girl-listening-music-in-headphones-picture-id1300324580?b=1&k=20&m=1300324580&s=170667a&w=0&h=csNLv_RqHxnWMsuzIIEGqCS_Wz9_OmrGXcOSIiyxwj4="></img>
     <div className="d-block align-self-center">
@@ -176,16 +200,17 @@ return (
     </div>
     </div>
 
-    <div className="">
+
+
+</div>
+
+
+
+
+<div ref={likedSongsdiv} className="LikedDiv">
     {likedSongs}
-</div>
-</div>
+     </div>
 
-</div>
-
-
-
-{/* } */}
 
 </div>
     )

@@ -4,8 +4,7 @@ import { BiDotsVerticalRounded} from "react-icons/bi"
 
 function PlaylistSongs(prop){
 
-const {AllSongs, SetAllSongs, Plsongs, SetPlSongs} = prop
-// console.log(Plsongs)
+
 
 
     function LikeSong(){

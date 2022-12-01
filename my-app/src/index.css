@@ -41,7 +41,7 @@ code {
     /* border: 1px solid white; */
 }
 
-.home-nav {
+.navigation-bar {
     background-color: #1A1E1F;
     width: 3.25rem;
     height: 14.375rem;
@@ -51,6 +51,26 @@ code {
     line-height: 3.2rem;
     box-sizing: border-box;
     /* border: 1px solid white; */
+}
+
+.nav:hover{
+    background-color: #FACD66;
+}
+
+.home-nav{
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.home-nav :hover{
+    color: #FACD66;
+}
+
+.hoverNav{
+    color: #FACD66;
+}
+
+.hoverNav :hover{
+   color: #FACD66;
 }
 
 .profile-nav {
@@ -133,6 +153,7 @@ code {
     color: #1D2123;
     border: none;
 }
+
 
 .button-container {
     /* border: 1px solid white; */
@@ -303,11 +324,6 @@ code {
     overflow-y: auto;
 }
 
-.LikedDiv{
-display: none;
-/* border: 1px solid red; */
-width: 100%;
-}
 
 .liked-image{
     border-radius: 25px;
@@ -315,14 +331,10 @@ width: 100%;
     width: 500px;
 }
 
-
 .container {
     /* display: block; */
     border: 1px solid blue;
 }
-
-
-
 
 
 .footer {
@@ -345,13 +357,22 @@ width: 100%;
     background-color: black;
 }
 
-.dashboard-page{
-    border: 1px solid red;
-}
+
 
 .LikedDiv{
-    border: 1px solid blue;
+    display: none;
 }
+
+.collectionPage
+{
+     /* border: 1px solid blue; */
+    width: 100%;
+}
+
+.collection :active{
+
+}
+
 
 
 

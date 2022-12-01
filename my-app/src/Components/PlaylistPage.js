@@ -26,12 +26,7 @@ function PlaylistPage(prop){
    let demo
    if(UpdatedPlaylist.length > 0){
        demo = UpdatedPlaylist[PlaylistIndex].files
-      //  let duration = UpdatedPlaylist[PlaylistIndex].files
-      //  console.log(duration)
-      // demo.forEach((item)=>{
-      //  sum += item.duration
 
-      // })
 
       for(let i = 0; i<demo.length; i++){
         sum += parseInt(demo[i].duration)
@@ -49,9 +44,6 @@ function PlaylistPage(prop){
 
    function handlePlaylistSong(index){
 
-    
-
-
     AudioRef.current.load()
     AudioRef.current.play()
 
@@ -64,7 +56,6 @@ function PlaylistPage(prop){
       setCurrentSongIndex(index)
        SetAllSongs(demo)
        console.log(AllSongs)
-    //    console.log(index)
    }
 
 
@@ -81,8 +72,6 @@ let demoSongs
            artist={item.artist}
            title={item.title}
            audio={item.audio}
-            AllSongs={AllSongs}
-            SetAllSongs={SetAllSongs}
             handlePlaylistSong={()=>handlePlaylistSong(index)}
 
            />
@@ -124,7 +113,7 @@ let demoSongs
 
 
 
-      <div className="playlist-list  ">
+      <div className="playlist-list">
         {demoSongs}
         </div>
 

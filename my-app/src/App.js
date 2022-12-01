@@ -19,6 +19,9 @@ import LikedPage from './Components/LikedPage';
 function App() {
 
 
+    // const activePage = window.location.pathname
+    // console.log(activePage)
+
 
 
   const [color, changeColor] = useState("#282c34");
@@ -193,6 +196,7 @@ function App() {
             </Route>
 
             <Route element={<WithNav/>}>
+
             <Route  path="/Album"  element={<Album
                                              CollectionData = {CollectionData}
                                              SetCollectionData = {SetCollectionData}
@@ -203,6 +207,14 @@ function App() {
                                               mine={mine}
                                               setmine={setmine}
                                               newRelease={newRelease}
+                                              AllSongs={AllSongs}
+                                              SetAllSongs={SetAllSongs}
+                                              setCurrentSongIndex={setCurrentSongIndex}
+                                              rotate={rotate}
+                                              SetRotate={SetRotate}
+                                              AudioRef={AudioRef}
+                                              PlayBtnRef={PlayBtnRef}
+                                              PauseBtnRef={PauseBtnRef}
 
                                              />}/>
             </Route>
