@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillHome,  } from "react-icons/ai"
 import { FaUserAlt } from "react-icons/fa"
 import { IoLogOutSharp } from "react-icons/io5"
@@ -7,38 +7,28 @@ import exploreLogo from './video-horizontal.svg'
 import { Link } from "react-router-dom";
 import { AiOutlineSearch,  AiOutlineMenu  } from "react-icons/ai"
 import { MdOutlineRadio, MdVideoLibrary } from "react-icons/md"
+import { useLocation } from "react-router-dom";
 
-
-
-let btns = document.querySelectorAll("plx")
-console.log(btns)
-
-for(let i = 0; i<btns.length; i++){
-
-    btns[i].addEventListener('click', function(){
-    console.log("id")
-    })
-}
-
-function changeActiveColor(){
-
-}
 
 
 
 function Navigation(){
+
+    const pathname = useLocation().pathname
+
+
     return (
         <>
           <div className="navigation-bar d-none d-lg-block mt-5  p-2">
 
-         <Link to="/"><div onClick={changeActiveColor} className="home-nav hoverNav plx ">
-            <AiFillHome style={{fontSize:"1.5rem"}}/>
+         <Link to="/"><div className={pathname === '/' ? "home-nav hoverNav" : "home-nav"} >
+            <AiFillHome  style={{fontSize:"1.5rem"}}/>
             </div>
             </Link>
 
 
-         <Link to="/Album"><div  onClick={changeActiveColor} className="collections-nav plx ">
-       <MdVideoLibrary style={{fontSize:"1.5rem", color:"rgba(255, 255, 255, 0.25)"}}/>
+         <Link to="/Album"><div className={pathname === '/Album' || pathname === '/LikedPage' ? "home-nav collection-nav hoverNav" : "home-nav collection-nav"}>
+       <MdVideoLibrary style={{fontSize:"1.5rem"}}/>
           </div></Link>
 
 
@@ -52,7 +42,8 @@ function Navigation(){
              <IoLogOutSharp className="mt-3 profile-icons"  style={{fontSize:"1.4rem", color:"rgba(255, 255, 255, 0.25)"}}/>
         </div>
 
-        </div></>
+        </div>
+        </>
     )
 
 }

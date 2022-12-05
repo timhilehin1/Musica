@@ -1,11 +1,13 @@
 import  { React, useState, useEffect, useRef } from "react";
 import NewMusic from "./NewMusic";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlinePause } from "react-icons/ai"
 import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md"
 
 function NewReleases(prop){
 
+
+   
 
 const{ newRelease, SetnewRelease,
 currentSongIndex, setCurrentSongIndex, IdChecker,SetIdChecker, PlayBtnRef,

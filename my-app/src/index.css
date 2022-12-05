@@ -3,6 +3,9 @@
 
 }
 
+
+
+
 body {
     margin: 0;
     font-family: 'Quicksand', sans-serif;
@@ -61,17 +64,18 @@ code {
   color: rgba(255, 255, 255, 0.25);
 }
 
-.home-nav :hover{
+.home-nav.hoverNav{
     color: #FACD66;
 }
 
-.hoverNav{
+/* .home-nav :hover{
     color: #FACD66;
-}
+} */
 
-.hoverNav :hover{
+
+/* .hoverNav :hover{
    color: #FACD66;
-}
+} */
 
 .profile-nav {
     background-color: #1A1E1F;
@@ -149,6 +153,12 @@ code {
 }
 
 .btnn:hover {
+    background-color: #FACD66;
+    color: #1D2123;
+    border: none;
+}
+
+.activeBtnn{
     background-color: #FACD66;
     color: #1D2123;
     border: none;

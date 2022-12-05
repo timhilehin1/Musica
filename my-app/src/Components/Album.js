@@ -1,16 +1,18 @@
 import {React,  useRef, useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BsFillPlayCircleFill} from "react-icons/bs"
 import PlaylistSongs from "./PlaylistSongs";
 
 
 function Album(prop){
 
+    const pathname = useLocation().pathname
+
 const {CollectionData, SetCollectionData, FinalPlaylist, SetFinalPlaylist,
 SetPlaylistIndex, PlaylistIndex, mine, newRelease, setmine, AllSongs,
- SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate} = prop
+ SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, popular} = prop
 
-// console.log(newRelease)
+
 const [localArray, setLocalArray] = useState([])
 const [likeArray, setLikeArray] = useState([])
 const [test, setTest] = useState()
@@ -38,7 +40,7 @@ else if(pageWidth < 500 && colRef.current){
 }
 
 useEffect(()=>{
-          setmine(FinalPlaylist)
+
 
           function handleWindowResize(){
          setPageWidth(getWindowSize());
@@ -73,6 +75,17 @@ useEffect(()=>{
             else if(newRelease[i] === false){
                 likeArray.splice(i,1)
             }
+        }
+
+        for(let i = 0; i<popular.length; i++){
+            if(popular[i].like === true){
+                likeArray.push(popular[i])
+            }
+
+        else if(popular[i] === false){
+            likeArray.splice(i,1)
+        }
+
         }
 
 
@@ -150,6 +163,8 @@ return (
 )
 })
 
+console.log(likeArray.length)
+
 const likedSongs = likeArray.map((item,index)=>{
     return (
          <>
@@ -159,10 +174,7 @@ const likedSongs = likeArray.map((item,index)=>{
            artist={item.artist}
            title={item.title}
            audio={item.audio}
-        //    PlayLikedSong = {()=>{PlayLikedSong(index)}}
-            // AllSongs={AllSongs}
-            // SetAllSongs={SetAllSongs}
-            handlePlaylistSong={()=>handlePlaylistSong(index)}
+           handlePlaylistSong={()=>handlePlaylistSong(index)}
 
            />
          </>
@@ -177,8 +189,8 @@ return (
 <div className="d-block collectionPage">
 
 <div className="mt-5  d-flex button-container gap-lg-5 gap-2">
-<button onClick={handleCollection} className="collection btnn">My Collection</button>
-<button onClick={handleLike} className="likes btnn">Likes</button>
+<button onClick={handleCollection} className="collection btnn activeBtnn">My Collection</button>
+<Link to="/LikedPage"><button onClick={handleLike} className="likes btnn">Likes</button></Link>
 
 </div>
 
@@ -195,7 +207,7 @@ return (
     <img className="liked-image mt-2 img-fluid" src="https://media.istockphoto.com/photos/young-pink-hair-girl-listening-music-in-headphones-picture-id1300324580?b=1&k=20&m=1300324580&s=170667a&w=0&h=csNLv_RqHxnWMsuzIIEGqCS_Wz9_OmrGXcOSIiyxwj4="></img>
     <div className="d-block align-self-center">
     <p>Liked Songs</p>
-    <p>N of songs in array</p>
+    {likeArray.length > 0 ? <p>{likeArray.length} Songs </p>  : ""}
     <button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
     </div>
     </div>
@@ -218,57 +230,3 @@ return (
 
 export default Album
 
-
-     {/* <div className="mt-4 d-lg-flex d-block gap-4"> */}
-
-{/* <div className="position-relative collection-img"  ref={Pushref}>
-<img  className="releases small-picture collection-img" src={require('./Images/Rectangle 14.png')}></img>
-<img  className="bigger-picture " src={require('./Images/Rectangle 26.png')}></img>
-<div className=" ms-3 title">Limits</div>
-</div> */}
-
-{/* <div className="position-relative  collection-img"  ref={Pushref}>
-<img  className="releases  small-picture collection-img" src={require('./Images/Rectangle 17.png')}></img>
-<img  className="bigger-picture mt-4 " src={require('./Images/Rectangle 27.png')}></img>
-<div className=" ms-3 title">Limits</div>
-</div> */}
-
-{/* <div className="position-relative collection-img"  ref={Pushref}>
-<img  className="releases small-picture collection-img" src={require('./Images/Rectangle 19.png')}></img>
-<img  className="bigger-picture mt-4 " src={require('./Images/Rectangle 28.png')}></img>
-<div className=" ms-3 title">Limits</div>
-</div> */}
-
-
-{/* <div className="position-relative collection-img"  ref={Pushref}>
-<img  className="releases small-picture collection-img" src={require('./Images/Rectangle 20.png')}></img>
-<div className=" ms-3 title">Limits</div>
-</div> */}
-
-{/* // */}
-
-{/* <div className="position-relative   liked-collection "  ref={Likeref}>
-<img  className="releases  small-picture " src={require('./Images/Rectangle 15.png')}></img>
-<img  className="bigger-picture" src={require('./Images/Rectangle 26.png')}></img>
-<div className=" ms-3 title">Xtra cool</div>
-</div> */}
-
-{/* <div className="position-relative  liked-collection  "  ref={Likeref}>
-<img   className="releases  small-picture " src={require('./Images/Rectangle 15.png')}></img>
-<img  className="bigger-picture mt-4 " src={require('./Images/Rectangle 27.png')}></img>
-<div className=" ms-3 title">Patek</div>
-</div> */}
-
-{/* <div className="position-relative liked-collection"  ref={Likeref}>
-<img className="releases   small-picture" src={require('./Images/Rectangle 15.png')}></img>
-<img  className="bigger-picture mt-4 " src={require('./Images/Rectangle 28.png')}></img>
-<div className=" ms-3 title">Ototo</div>
-</div> */}
-
-{/* <div className="position-relative liked-collection"  ref={Likeref}>
-<img  className="releases  small-picture  " src={require('./Images/Rectangle 15.png')}></img>
-<div className=" ms-3 title">Joha</div>
-</div> */}
-
-
-     {/* </div> */}

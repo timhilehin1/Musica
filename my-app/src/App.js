@@ -6,7 +6,7 @@ import Navigation from './Components/Navigation';
 import NewReleases from './Components/NewReleases';
 import Popular from './Components/Popular';
 import Player from './Components/Player';
-import {HashRouter as Router, Routes,  Switch, Link, Redirect, Route} from 'react-router-dom';
+import {HashRouter as Router, Routes, useLocation,  Switch, Link, Redirect, Route} from 'react-router-dom';
 import Album from './Components/Album';
 import {Outlet} from 'react-router';
 import { useState, useRef, useEffect } from 'react';
@@ -19,8 +19,7 @@ import LikedPage from './Components/LikedPage';
 function App() {
 
 
-    // const activePage = window.location.pathname
-    // console.log(activePage)
+
 
 
 
@@ -43,19 +42,12 @@ function App() {
    const [LikedPlaylist, setLikedPlaylist] = useState([])
 
 
-      const [FinalPlaylist, SetFinalPlaylist] = useState(JSON.parse(sessionStorage.getItem("data")) || [])
-
-
-
-
-
-
-
+    const [FinalPlaylist, SetFinalPlaylist] = useState(JSON.parse(sessionStorage.getItem("data")) || [])
 
 
   useEffect(()=>{
 
-    fetch('https://musica-api.onrender.com/new')
+    fetch('https://musica-api.up.railway.app/new')
         .then(response => response.json())
         .then(response => SetnewRelease(response.map((item)=>{
           return {...item, like:false}
@@ -67,7 +59,7 @@ function App() {
 
         useEffect(()=>{
 
-          fetch('https://musica-api.onrender.com/popular')
+          fetch('https://musica-api.up.railway.app/popular')
               .then(response => response.json())
               .then(response => SetPopular(response.map((item)=>{
                 return {...item, like:false}
@@ -78,7 +70,7 @@ function App() {
 
 
               useEffect(()=>{
-                fetch('https://musica-api.onrender.com/playlist')
+                fetch('https://musica-api.up.railway.app/playlist')
                 .then(response=>response.json())
                 .then(response=>SetPlaylistData(response))
                 .catch(error=>console.log(error))
@@ -215,6 +207,7 @@ function App() {
                                               AudioRef={AudioRef}
                                               PlayBtnRef={PlayBtnRef}
                                               PauseBtnRef={PauseBtnRef}
+                                              popular={popular}
 
                                              />}/>
             </Route>

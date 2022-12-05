@@ -7,9 +7,12 @@ import { FaUserAlt } from "react-icons/fa"
 import { IoLogOutSharp } from "react-icons/io5"
 import { AiOutlineMenu } from "react-icons/ai"
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
 function Searchbar(){
+
+    const pathname = useLocation().pathname
     return (
         <div className="header d-flex gap-2 gap-lg-5 ">
              <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -23,35 +26,35 @@ function Searchbar(){
   </div>
 
   <div class="offcanvas-body">
-  <Link className="visited-link" to="/"><div className="d-flex gap-4 mt-3">
-<AiFillHome style={{fontSize:"1.5rem", color:"#FACD66"}}/>
+  <Link  style={{ textDecoration: 'none' }}  to="/"><div className={pathname === "/" ? "d-flex gap-4 mt-3 home-nav hoverNav" : "d-flex gap-4 mt-3 home-nav"}>
+<AiFillHome style={{fontSize:"1.5rem"}}/>
 <p>Home</p>
 </div>
 </Link>
 
 
- <Link className="visited-link" to="/Album"><div className="d-flex gap-4 mt-3">
-<AiFillHome style={{fontSize:"1.5rem", color:"rgba(255, 255, 255, 0.25)"}}/>
+ <Link  style={{ textDecoration: 'none' }}  to="/Album"><div className={pathname === "/Album" ? "d-flex gap-4 mt-3 home-nav hoverNav" : "d-flex gap-4 mt-3 home-nav"}>
+ <MdVideoLibrary  style={{fontSize:"1.5rem"}}/>
 <p>Collections</p>
 </div></Link>
 
- <div className="d-flex gap-4 mt-3">
-<MdOutlineRadio style={{fontSize:"1.5rem",color:"rgba(255, 255, 255, 0.25)"}}/>
+ <div className="d-flex gap-4 mt-3 home-nav">
+<MdOutlineRadio style={{fontSize:"1.5rem"}}/>
 <p>Radio</p>
 </div>
 
- <div className="d-flex gap-4 mt-3">
-<MdVideoLibrary style={{fontSize:"1.5rem", color:"rgba(255, 255, 255, 0.25)"}}/>
+ <div className="d-flex gap-4 mt-3 home-nav">
+<MdVideoLibrary style={{fontSize:"1.5rem"}}/>
 <p>Music videos</p>
 </div>
 
- <div className="d-flex gap-4 mt-3">
-<FaUserAlt style={{fontSize:"1.5rem",  color:"rgba(255, 255, 255, 0.25)"}}/>
+ <div className="d-flex gap-4 mt-3 home-nav">
+<FaUserAlt style={{fontSize:"1.5rem"}}/>
 <p>Profile</p>
 </div>
 
- <div className="d-flex gap-4 mt-3">
-<IoLogOutSharp style={{fontSize:"1.5rem", color:"rgba(255, 255, 255, 0.25)"}}/>
+ <div className="d-flex gap-4 mt-3 home-nav">
+<IoLogOutSharp style={{fontSize:"1.5rem"}}/>
 <p>Logout</p>
 </div>
 
