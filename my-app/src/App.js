@@ -236,7 +236,16 @@ function App() {
             </Route>
 
             <Route element={<WithNav/>}>
-            <Route path="/LikedPage" element={<LikedPage/>}/>
+            <Route path="/LikedPage" element={<LikedPage
+                                               newRelease={newRelease}
+                                               popular={popular}
+                                               SetAllSongs={SetAllSongs}
+                                               setCurrentSongIndex={setCurrentSongIndex}
+                                               SetRotate={SetRotate}
+                                               AudioRef={AudioRef}
+                                               PlayBtnRef={PlayBtnRef}
+                                               PauseBtnRef={PauseBtnRef}
+                                               />}/>
             </Route>
 
 

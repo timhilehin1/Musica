@@ -4,11 +4,76 @@ import { Link, useLocation } from "react-router-dom";
 import { BsFillPlayCircleFill} from "react-icons/bs"
 
 
-function LikedPage(){
+function LikedPage(prop){
+
+    const { SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular} = prop
+
+    const [likeArray, setLikeArray] = useState([])
+    const [reload, setReload] = useState()
 
     useEffect(()=>{
-      
-    }, [])
+
+        for(let i=0; i<newRelease.length; i++){
+            if(newRelease[i].like === true){
+              likeArray.push(newRelease[i])
+            }
+
+            else if(newRelease[i] === false){
+                likeArray.splice(i,1)
+            }
+        }
+
+        for(let i = 0; i<popular.length; i++){
+            if(popular[i].like === true){
+                likeArray.push(popular[i])
+            }
+
+        else if(popular[i] === false){
+            likeArray.splice(i,1)
+        }
+
+        }
+
+
+        setReload(likeArray)  //don't really know what this guy is doing
+
+    }, [likeArray])
+
+
+
+    function handlePlaylistSong(index){
+        console.log(index)
+        SetAllSongs(likeArray)
+        setCurrentSongIndex(index)
+
+        AudioRef.current.load()
+        AudioRef.current.play()
+
+        PlayBtnRef.current.style.display = "none"
+        PauseBtnRef.current.style.display = "block"
+        SetRotate(false)
+    }
+
+
+
+    const likedSongs = likeArray.map((item,index)=>{
+        return (
+             <>
+             <PlaylistSongs
+               cover={item.cover}
+               duration={item.duration}
+               artist={item.artist}
+               title={item.title}
+               audio={item.audio}
+               handlePlaylistSong={()=>handlePlaylistSong(index)}
+
+               />
+             </>
+        )
+    })
+
+    console.log(likedSongs)
+
 
     return (
 
@@ -23,11 +88,15 @@ function LikedPage(){
     <img className="liked-image mt-2 img-fluid" src="https://media.istockphoto.com/photos/young-pink-hair-girl-listening-music-in-headphones-picture-id1300324580?b=1&k=20&m=1300324580&s=170667a&w=0&h=csNLv_RqHxnWMsuzIIEGqCS_Wz9_OmrGXcOSIiyxwj4="></img>
     <div className="d-block align-self-center">
     <p>Liked Songs</p>
-    {/* {likeArray.length > 0 ? <p>{likeArray.length} Songs </p>  : ""} */}
+    {likeArray.length > 0 ? <p>{likeArray.length} Songs </p>  : ""}
     <button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
     </div>
     </div>
 
+
+<div className="">
+    {likedSongs}
+     </div>
 
         </div>
 
