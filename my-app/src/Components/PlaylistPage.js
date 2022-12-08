@@ -8,11 +8,7 @@ function PlaylistPage(prop){
 
     const {PlaylistData, SetPlaylistData,  SetPlaylistIndex, PlaylistIndex, color, changeColor, Appref, AllSongs, SetAllSongs, Plsongs, SetPlSongs, currentSongIndex, setCurrentSongIndex,  AudioRef, PlayBtnRef, PauseBtnRef, rotate, SetRotate, playListID, setplayListID} = prop
 
-    // const [Plsongs, SetPlSongs] = useState([])
-  // const path = useLocation().pathname;
-  // const location = path.split("/")[1];
 
-  // console.log(location)
   const [SongDuration, SetSongDuration] = useState()
 
 

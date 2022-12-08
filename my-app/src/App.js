@@ -190,25 +190,8 @@ function App() {
             <Route element={<WithNav/>}>
 
             <Route  path="/Album"  element={<Album
-                                             CollectionData = {CollectionData}
-                                             SetCollectionData = {SetCollectionData}
                                               FinalPlaylist= {FinalPlaylist}
-                                              SetFinalPlaylist = {SetFinalPlaylist}
-                                              PlaylistIndex={PlaylistIndex}
                                               SetPlaylistIndex={SetPlaylistIndex}
-                                              mine={mine}
-                                              setmine={setmine}
-                                              newRelease={newRelease}
-                                              AllSongs={AllSongs}
-                                              SetAllSongs={SetAllSongs}
-                                              setCurrentSongIndex={setCurrentSongIndex}
-                                              rotate={rotate}
-                                              SetRotate={SetRotate}
-                                              AudioRef={AudioRef}
-                                              PlayBtnRef={PlayBtnRef}
-                                              PauseBtnRef={PauseBtnRef}
-                                              popular={popular}
-
                                              />}/>
             </Route>
 

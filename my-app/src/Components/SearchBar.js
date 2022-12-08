@@ -33,7 +33,7 @@ function Searchbar(){
 </Link>
 
 
- <Link  style={{ textDecoration: 'none' }}  to="/Album"><div className={pathname === "/Album" ? "d-flex gap-4 mt-3 home-nav hoverNav" : "d-flex gap-4 mt-3 home-nav"}>
+ <Link  style={{ textDecoration: 'none' }}  to="/Album"><div className={pathname === "/Album" || pathname === '/LikedPage' ? "d-flex gap-4 mt-3 home-nav hoverNav" : "d-flex gap-4 mt-3 home-nav"}>
  <MdVideoLibrary  style={{fontSize:"1.5rem"}}/>
 <p>Collections</p>
 </div></Link>

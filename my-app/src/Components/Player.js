@@ -130,11 +130,11 @@ const volumeProgressBar = useRef()
 
        const VolumeProgress = (ClickX/width) * 100
        const Volume = (VolumeProgress)/100
-    
+
 
         innerVolumeBar.current.style.width = `${VolumeProgress}%`
         AudioRef.current.volume = Volume
-    
+
 
    }
 
@@ -161,7 +161,10 @@ const volumeProgressBar = useRef()
     return (
         <>
         {/* <div className={AllSongs.length > 0 ? "d-block" : "d-none"}> */}
-        <div className="w-100 p-2 d-flex justify-content-between align-items-center player">
+{
+    
+
+        <div className="w-100  p-2 d-flex justify-content-between align-items-center player">
 
            <div className="d-flex">
                        <audio ref={AudioRef}  onTimeUpdate={handleUpdate}>
@@ -198,6 +201,8 @@ const volumeProgressBar = useRef()
             </div>
         </div>
         </div>
+
+}
         {/* </div> */}
         </>
     )
@@ -205,33 +210,3 @@ const volumeProgressBar = useRef()
 
 export default Player
 
-
-//   <img className="releases player-img " src={IdChecker === 'new' ? newRelease.length > 0 && newRelease[currentSongIndex].cover : popular.length > 0 && popular[currentSongIndex].cover }  ></img>
-
-
-// let array = [0,1,2,3]
-
-//    function Test(a){
-//     //   console.log(array)
-//         for(let i = 0; i<array.length; i++){
-//             console.log(array[i])
-//             if(array[i]===1){
-//               console.log("i.m up")
-//             }
-
-//             else{
-//                 return a
-//             }
-
-            // if(array[i] === 1){
-            //  console.log("gone")
-            // }
-
-            // else {
-            //     return 0
-            // }
-    //     }
-    // }
-
-    //  const ans = Test(5)
-    //  console.log(ans)
