@@ -7,37 +7,8 @@ import PlayerComp from "./PlayerComp";
 function Player(prop){
    const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex,SetPopular,popular,IdChecker,SetIdChecker, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom, AllSongs, SetAllSongs  } = prop
 
-//  const  AudioEl =  useRef()
+   const [repeat, SetRepeat] = useState(false)
 
-//  const [AllSongs, SetAllSongs] = useState([])
-// useEffect(()=>{
-//     if(random.includes('new')){
-//         SetAllSongs(newRelease)
-//     }
-
-//     else{
-//         SetAllSongs(popular)
-//         console.log("help")
-//     }
-
-// },[random])
-// console.log(random)
-// console.log(AllSongs)
-
-    // useEffect(()=>{
-    // if(IdChecker === "new"){
-    //      SetAllSongs(newRelease)
-
-    //  }
-    //  else if(IdChecker==="popular"){
-    //      SetAllSongs(popular)
-    //  }
-    //  console.log(random)
-
-    // },[random])
-    // if(AllSongs.l)
-    // console.log(AllSongs[currentSongIndex].audio)
-    // console.log(AudioRef.current.currentTime)
 
 const progressRef = useRef()
 
@@ -135,7 +106,23 @@ const volumeProgressBar = useRef()
         innerVolumeBar.current.style.width = `${VolumeProgress}%`
         AudioRef.current.volume = Volume
 
+   }
 
+   function handleRepeat(){
+    SetRepeat(!repeat)
+
+    if(!repeat){
+    AudioRef.current.loop = true
+    AudioRef.current.play()
+    
+    }
+
+    else{
+        AudioRef.current.loop = false
+    }
+
+    console.log(repeat)
+    
    }
 
      let PlayerCard
@@ -167,7 +154,7 @@ const volumeProgressBar = useRef()
         <div className="w-100  p-2 d-flex justify-content-between align-items-center player">
 
            <div className="d-flex">
-                       <audio ref={AudioRef}  onTimeUpdate={handleUpdate}>
+                       <audio ref={AudioRef}    onTimeUpdate={handleUpdate}>
         <source className="audio" src={ AllSongs.length > 0 && AllSongs[currentSongIndex].audio} type="audio/mp3"></source>
 
     </audio>
@@ -187,7 +174,7 @@ const volumeProgressBar = useRef()
             <button onClick={handlePlay}  ref={PlayBtnRef} className="  nav-btns play"><BiPlay/></button>
             <button onClick={handlePause} ref={PauseBtnRef} className="  nav-btns pause"><BiPause/></button>
             <button onClick={handleNext} className=" nav-btns next"><BiSkipNext/></button>
-            <button className=" mobile  nav-btns repeat"><RiRepeatOneLine/></button>
+            <button onClick={handleRepeat} className=" mobile  nav-btns repeat"><RiRepeatOneLine style={{color: repeat ? "#FACD66" : ""}}/></button>
             </div>
             <div ref={progressRef} onClick={(e)=>SetProgress(e)} className="progress-bar mobile ">
                 <div ref={innerBar} className="progress"></div>
