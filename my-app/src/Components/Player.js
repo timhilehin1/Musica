@@ -110,20 +110,9 @@ const volumeProgressBar = useRef()
 
    function handleRepeat(){
     SetRepeat(!repeat)
-
-    if(!repeat){
-    AudioRef.current.loop = true
-    AudioRef.current.play()
-    
-    }
-
-    else{
-        AudioRef.current.loop = false
-    }
-
-    console.log(repeat)
     
    }
+   
 
      let PlayerCard
             if(prop.PlayerData){
@@ -154,7 +143,7 @@ const volumeProgressBar = useRef()
         <div className="w-100  p-2 d-flex justify-content-between align-items-center player">
 
            <div className="d-flex">
-                       <audio ref={AudioRef}    onTimeUpdate={handleUpdate}>
+                       <audio ref={AudioRef} loop={repeat ? true : false}   onTimeUpdate={handleUpdate}>
         <source className="audio" src={ AllSongs.length > 0 && AllSongs[currentSongIndex].audio} type="audio/mp3"></source>
 
     </audio>
