@@ -1,18 +1,13 @@
 import  { React, useState, useEffect, useRef } from "react";
 import NewMusic from "./NewMusic";
-import { Link, useLocation } from "react-router-dom";
-import { AiOutlinePause } from "react-icons/ai"
-import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md"
 
 function NewReleases(prop){
 
 
-   
 
-const{ newRelease, SetnewRelease,
-currentSongIndex, setCurrentSongIndex, IdChecker,SetIdChecker, PlayBtnRef,
- PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom,
-  AllSongs, SetAllSongs, LikedPlaylist, setLikedPlaylist} = prop
+
+const{ newRelease, SetnewRelease, setCurrentSongIndex, SetIdChecker, PlayBtnRef,
+ PauseBtnRef,  SetRotate, AudioRef,  SetRandom, SetAllSongs} = prop
 
 
 
@@ -30,7 +25,6 @@ let updatedNewRelease= []
 
 
                   setCurrentSongIndex(index)
-                //   console.log(currentSongIndex)
                   SetIdChecker(id.substr(0,3))
                   SetRandom(id)
 
@@ -69,7 +63,6 @@ if(newRelease){
 
         return (
         <>
-        {/* { console.log(index)} */}
         <NewMusic
         key={item.id}
         SongTitle={item.title}
@@ -88,10 +81,7 @@ if(newRelease){
         )
     })
 }
-if(newRelease.length > 0){
 
-
-}
 
 
     return (
@@ -109,27 +99,3 @@ if(newRelease.length > 0){
 export default NewReleases
 
 
- // for(let i=0; i<newRelease.length; i++){
-                    //     if(newRelease[i].id === id){
-                    //         // console.log("present")
-                    //         let PlayerObject= {
-                    //             ...newRelease[i]
-                    //         }
-
-
-                    //     //    {<audio  ref={prop.AudioRef} controls >
-                    //     //     <source className="audio" src={audio} type="audio/mp3"></source>
-
-                    //     // </audio>}
-
-                    //     // console.log(prop.AudioRef)
-                    //         newData.push(PlayerObject)
-                    //         prop.SetPlayerData(newData)
-                    //         // console.log(prop.PlayerData)
-                    //     }
-
-                    // }
-
-                    //  prop.ForwardedRef.current.classList.add('play')
-                    //  prop.PlayBtnRef.current.style.display="none"
-                    //  prop.PauseBtnRef.current.style.display="block"

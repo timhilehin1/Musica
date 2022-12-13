@@ -10,12 +10,13 @@ function PlaylistPage(prop){
 
 
   const [SongDuration, SetSongDuration] = useState()
+  const [plays, setPlays] = useState(true)
 
 
 
 
    const UpdatedPlaylist = PlaylistData.slice(0,3)
-   console.log(UpdatedPlaylist)
+//    console.log(UpdatedPlaylist)
 
 //    console.log(UpdatedPlaylist)
    let sum = 0
@@ -53,6 +54,54 @@ function PlaylistPage(prop){
        SetAllSongs(demo)
        console.log(AllSongs)
    }
+
+   function PlayAll(){
+       SetAllSongs(demo)
+       setCurrentSongIndex(0)
+       AudioRef.current.load()
+       AudioRef.current.play()
+       PlayBtnRef.current.style.display = "none"
+       PauseBtnRef.current.style.display = "block"
+       SetRotate(false)
+
+    AudioRef.current.addEventListener("ended", ()=>{
+
+    if (currentSongIndex === 5){
+        setCurrentSongIndex(0)
+        setTimeout(playsongs, 2000)
+        alert("last song")
+    }
+
+    else{
+        setCurrentSongIndex((previndex)=>{
+            return previndex + 1
+        })
+
+        setTimeout(playsongs, 2000)
+    }
+
+
+
+
+    })
+
+
+   }
+
+   function playsongs(){
+    AudioRef.current.load()
+    AudioRef.current.play()
+    console.log("play next")
+   }
+   console.log(currentSongIndex)
+   console.log(AllSongs.length)
+
+
+//    useEffect(()=>{
+//         AudioRef.current.load()
+//         AudioRef.current.play()
+
+//    },[currentSongIndex])
 
 
 
@@ -99,7 +148,7 @@ let demoSongs
 
              <div className="d-flex gap-2">
 
-              <button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
+              <button className="playall" onClick={PlayAll}> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
                <button className="playall collection"><SiApplemusic style={{color:"#FACD66", fontSize:"1.2rem"}}/> Add to collection</button>
 
              </div>

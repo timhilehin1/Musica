@@ -5,7 +5,7 @@ import PlayerComp from "./PlayerComp";
 
 
 function Player(prop){
-   const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex,SetPopular,popular,IdChecker,SetIdChecker, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef, random, SetRandom, AllSongs, SetAllSongs  } = prop
+   const{  currentSongIndex, setCurrentSongIndex, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef,  AllSongs  } = prop
 
    const [repeat, SetRepeat] = useState(false)
 
@@ -15,7 +15,7 @@ const progressRef = useRef()
 const innerBar = useRef()
 const innerVolumeBar = useRef()
 const volumeProgressBar = useRef()
-//  console.log(progressRef.current)
+
     function handlePrev(){
 
         if(currentSongIndex < 1){
@@ -110,9 +110,10 @@ const volumeProgressBar = useRef()
 
    function handleRepeat(){
     SetRepeat(!repeat)
-    
+
    }
-   
+
+
 
      let PlayerCard
             if(prop.PlayerData){
@@ -138,7 +139,7 @@ const volumeProgressBar = useRef()
         <>
         {/* <div className={AllSongs.length > 0 ? "d-block" : "d-none"}> */}
 {
-    
+
 
         <div className="w-100  p-2 d-flex justify-content-between align-items-center player">
 

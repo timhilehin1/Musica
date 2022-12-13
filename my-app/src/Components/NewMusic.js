@@ -5,12 +5,7 @@ import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md"
 function NewMusic(prop){
 
     const {like, handleLike} = prop
-    // console.log(prop.index)
 
-    const Audioref = useRef()
-    const [IsPlaying, setIsPlaying] = useState(false)
-    // console.log(Audioref.current)
-    // Audio.play()
 
     return (
         <>
@@ -34,12 +29,3 @@ function NewMusic(prop){
 
 export default NewMusic
 
-    {/* <Link to ="/Album"> <img className="releases" src={require('./Images/Rectangle 14.png')}></img></Link> */}
-
-     {/* <img className="releases" src={require('./Images/Rectangle 14.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 17.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 18.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 19.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 20.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 14.png')}></img>
-            <img className="releases" src={require('./Images/Rectangle 14.png')}></img> */}

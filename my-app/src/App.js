@@ -264,10 +264,4 @@ function App() {
 }
 
 export default App;
-  {/* <Searchbar/>
-     <div className='dashboard-page d-flex gap-5'>
-        <Navigation/>
-        <Sidebar/>
-      </div>
- <NewReleases/>
- <Popular/> */}
+
