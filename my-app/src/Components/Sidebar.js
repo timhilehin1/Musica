@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import RandB from './RandB.png';
-import Dashboard from "./Dashboard";
 import Playlist from "./Playlist";
 import { BiTestTube } from "react-icons/bi";
 import { BsExclamationSquare } from "react-icons/bs";
@@ -14,7 +13,7 @@ import { BsExclamationSquare } from "react-icons/bs";
 function Sidebar(prop){
   const {PlaylistData, SetPlaylistData, SetPlaylistIndex, PlaylistIndex, color, changeColor, FinalPlaylist, SetFinalPlaylist,playListID, setplayListID } = prop
 
- 
+
 
 
 useEffect(()=>{
@@ -24,14 +23,14 @@ useEffect(()=>{
     SetFinalPlaylist(PlaylistData.slice(0,3).map((item)=>{
       return {...item, like:true}
     }))
-    
+
   }
 
   else{
     sessionStorage.setItem("data", JSON.stringify(FinalPlaylist))
   }
 
- 
+
 
 },[FinalPlaylist])
 
@@ -79,10 +78,6 @@ return newData
     })
 
    }
-
-
-//    console.log(FinalPlaylist)
-
 
 
 

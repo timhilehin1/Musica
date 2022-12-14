@@ -1,5 +1,4 @@
 
-import Dashboard from './Components/Dashboard';
 import Searchbar from './Components/SearchBar';
 import Sidebar from './Components/Sidebar';
 import Navigation from './Components/Navigation';

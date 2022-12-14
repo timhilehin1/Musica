@@ -1,13 +1,14 @@
 import {React,useEffect, useState, useRef} from "react";
 import { BiShuffle, BiSkipPrevious, BiPlay, BiSkipNext, BiVolumeFull, BiPause} from "react-icons/bi"
 import { RiRepeatOneLine } from "react-icons/ri"
-import PlayerComp from "./PlayerComp";
+
 
 
 function Player(prop){
-   const{  currentSongIndex, setCurrentSongIndex, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef,  AllSongs  } = prop
+   const{currentSongIndex, setCurrentSongIndex, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef,  AllSongs  } = prop
 
    const [repeat, SetRepeat] = useState(false)
+   const [shuffle, setShuffle] = useState(false)
 
 
 const progressRef = useRef()
@@ -16,30 +17,45 @@ const innerBar = useRef()
 const innerVolumeBar = useRef()
 const volumeProgressBar = useRef()
 
-    function handlePrev(){
+function playSongs(){
+    AudioRef.current.load()
+    AudioRef.current.play()
+   }
 
+    function handlePrev(){
         if(currentSongIndex < 1){
            setCurrentSongIndex(AllSongs.length - 1)
             AudioRef.current.load()
             AudioRef.current.play()
             return
         }
+
+        if(shuffle === true){
+        setCurrentSongIndex(Math.floor(Math.random() * AllSongs.length))
+        playSongs()
+        return
+        }
+
         setCurrentSongIndex(currentSongIndex-1)
-              console.log(currentSongIndex)
               AudioRef.current.load()
               AudioRef.current.play()
     }
 
       function handleNext(){
+
+          if(shuffle === true){
+            setCurrentSongIndex(Math.floor(Math.random() * AllSongs.length))
+             playSongs()
+             return
+           }
+
           if(currentSongIndex > AllSongs.length-2){
             setCurrentSongIndex(0)
-            AudioRef.current.load()
-            AudioRef.current.play()
+            playSongs()
             return
           }
-           AudioRef.current.load()
-           AudioRef.current.play()
 
+           playSongs()
       setCurrentSongIndex(currentSongIndex + 1)
     }
 
@@ -62,11 +78,45 @@ const volumeProgressBar = useRef()
 
 
    function handleShuffle(){
-  setCurrentSongIndex(Math.floor((Math.random() * AllSongs.length)))
-  AudioRef.current.load()
-  AudioRef.current.play()
+       setShuffle(!shuffle)
+
+        AudioRef.current.addEventListener("ended", ()=>{
+            SetRotate(true)
+           setCurrentSongIndex((previndex)=>{
+
+                return Math.floor(Math.random() * AllSongs.length)
+           })
+
+           setTimeout(playSongs, 2000)
+
+          })
+
+          console.log(shuffle)
 
    }
+
+//    if(shuffle === true){
+//        AudioRef.current.removeEventListener("ended", ()=>{
+//         SetRotate(true)
+//        setCurrentSongIndex((previndex)=>{
+
+//             return Math.floor(Math.random() * AllSongs.length)
+//        })
+
+//        setTimeout(playSongs, 2000)
+
+//       } )
+//       console.log("removed")
+//    }
+
+
+
+   function handleRepeat(){
+    SetRepeat(!repeat)
+
+   }
+
+
 
    function handleUpdate(){
 
@@ -74,8 +124,6 @@ const volumeProgressBar = useRef()
        const progressPercent = (currentTime / duration) * 100
     //    progressRef.current.style.width = `${progressPercent}%`
        innerBar.current.style.width = `${progressPercent}%`
-
-    //    console.log(AudioRef.current.volume)
    }
 
    function SetProgress(e){
@@ -86,10 +134,6 @@ const volumeProgressBar = useRef()
        const duration = AudioRef.current.duration
 
        AudioRef.current.currentTime = (ClickX/width) * duration
-    //   console.log(width)
-    //   console.log(ClickX)
-
-
 
    }
 
@@ -108,29 +152,22 @@ const volumeProgressBar = useRef()
 
    }
 
-   function handleRepeat(){
-    SetRepeat(!repeat)
+   if(AudioRef.current){
+    AudioRef.current.addEventListener("ended", ()=>{
+        SetRotate(true)
+        PlayBtnRef.current.style.display = "block"
+        PauseBtnRef.current.style.display = "none"
 
+    } )
+
+    AudioRef.current.addEventListener("playing", ()=>{
+        SetRotate(false)
+        PauseBtnRef.current.style.display = "block"
+        PlayBtnRef.current.style.display = "none"
+    })
    }
 
 
-
-     let PlayerCard
-            if(prop.PlayerData){
-                 PlayerCard = prop.PlayerData.map((item)=>{
-                return (
-                  <PlayerComp
-                  Cover={item.cover}
-                  SongTitle={item.title}
-                  Artist={item.artist}
-                  Audio={item.audio}
-                  PlayerRef={prop.ForwardedRef}
-                  PlayBtnRef={prop.PlayBtnRef}
-                  PauseBtnRef={prop.PauseBtnRef}
-                  />
-                )
-            })
-            }
 
 
 
@@ -159,7 +196,7 @@ const volumeProgressBar = useRef()
 
         <div className="nav-btns gap-4 d-flex flex-column">
             <div className="d-flex gap-2 gap-lg-5">
-            <button onClick={handleShuffle} className=" mobile nav-btns shuffle"><BiShuffle/></button>
+            <button onClick={handleShuffle} className=" mobile nav-btns shuffle"><BiShuffle style={{color: shuffle ? "#FACD66" : ""}}/></button>
             <button onClick={handlePrev}  className="  mobile nav-btns back"><BiSkipPrevious/></button>
             <button onClick={handlePlay}  ref={PlayBtnRef} className="  nav-btns play"><BiPlay/></button>
             <button onClick={handlePause} ref={PauseBtnRef} className="  nav-btns pause"><BiPause/></button>

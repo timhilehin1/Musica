@@ -75,7 +75,7 @@ function PlaylistPage(prop){
             else{
                 return previndex + 1
             }
-            
+
         })
 
         setTimeout(playsongs, 2000)
@@ -90,6 +90,8 @@ function PlaylistPage(prop){
     AudioRef.current.play()
     console.log("play next")
    }
+
+
 //    console.log(currentSongIndex)
 //    console.log(AllSongs.length)
 
@@ -109,13 +111,13 @@ let demoSongs
        return (
            <>
            <PlaylistSongs
+            key={item.id}
            cover={item.cover}
            duration={item.duration}
            artist={item.artist}
            title={item.title}
            audio={item.audio}
             handlePlaylistSong={()=>handlePlaylistSong(index)}
-
            />
            </>
        )

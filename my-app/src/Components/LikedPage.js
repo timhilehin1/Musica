@@ -85,19 +85,39 @@ function LikedPage(prop){
         AudioRef.current.play()
        }
 
+       function unlikeSong(id){
+           setLikeArray((prevArray)=>{
+
+            for(let i = 0; i<prevArray.length; i++){
+                if(prevArray[i].id === id){
+                    prevArray.splice(i, 1)
+
+                         }
+            }
+            console.log(prevArray)
+            return prevArray
+           })
+
+
+           
+       }
+
+
+
 
 
     const likedSongs = likeArray.map((item,index)=>{
         return (
              <>
              <PlaylistSongs
+               key={item.id}
                cover={item.cover}
                duration={item.duration}
                artist={item.artist}
                title={item.title}
                audio={item.audio}
                handlePlaylistSong={()=>handlePlaylistSong(index)}
-
+               unlikeSong={()=>unlikeSong(item.id)}
                />
              </>
         )
