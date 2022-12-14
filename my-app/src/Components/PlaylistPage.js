@@ -66,22 +66,19 @@ function PlaylistPage(prop){
 
     AudioRef.current.addEventListener("ended", ()=>{
 
-    if (currentSongIndex === 5){
-        setCurrentSongIndex(0)
-        setTimeout(playsongs, 2000)
-        alert("last song")
-    }
-
-    else{
         setCurrentSongIndex((previndex)=>{
-            return previndex + 1
+
+            if(previndex >= 4){
+                return 0
+            }
+
+            else{
+                return previndex + 1
+            }
+            
         })
 
         setTimeout(playsongs, 2000)
-    }
-
-
-
 
     })
 
@@ -93,8 +90,8 @@ function PlaylistPage(prop){
     AudioRef.current.play()
     console.log("play next")
    }
-   console.log(currentSongIndex)
-   console.log(AllSongs.length)
+//    console.log(currentSongIndex)
+//    console.log(AllSongs.length)
 
 
 //    useEffect(()=>{

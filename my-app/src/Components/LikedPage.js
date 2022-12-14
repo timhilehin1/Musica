@@ -42,7 +42,7 @@ function LikedPage(prop){
 
 
     function handlePlaylistSong(index){
-        console.log(index)
+        // console.log(index)
         SetAllSongs(likeArray)
         setCurrentSongIndex(index)
 
@@ -53,6 +53,37 @@ function LikedPage(prop){
         PauseBtnRef.current.style.display = "block"
         SetRotate(false)
     }
+
+    function handlePlayAll(){
+        SetAllSongs(likeArray)
+        setCurrentSongIndex(0)
+        AudioRef.current.load()
+        AudioRef.current.play()
+        PlayBtnRef.current.style.display = "none"
+        PauseBtnRef.current.style.display = "block"
+        SetRotate(false)
+
+        AudioRef.current.addEventListener("ended", ()=>{
+
+            setCurrentSongIndex((previndex)=>{
+                if(previndex >= likeArray.length-1){
+                    return 0
+                }
+
+                else {
+                    return previndex + 1
+                }
+            })
+
+            setTimeout(playsongs, 2000)
+
+        })
+    }
+
+    function playsongs(){
+        AudioRef.current.load()
+        AudioRef.current.play()
+       }
 
 
 
@@ -72,7 +103,7 @@ function LikedPage(prop){
         )
     })
 
-    console.log(likedSongs)
+    // console.log(likedSongs)
 
 
     return (
@@ -104,7 +135,7 @@ function LikedPage(prop){
 <div className="d-block align-self-center">
 <p>Liked Songs</p>
 {likeArray.length > 0 ? <p>{likeArray.length} Song{ likeArray.length === 1 ? '' : 's'} </p>  : ""}
-<button className="playall"> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
+<button className="playall" onClick={handlePlayAll}> <BsFillPlayCircleFill style={{color:"#FACD66", fontSize:"1.2rem"}}/> Play all</button>
 </div>
 </div>
 

@@ -37,7 +37,6 @@ function App() {
   const [PlaylistIndex, SetPlaylistIndex] = useState(0)
    const [Plsongs, SetPlSongs] = useState([])
    const [CollectionData, SetCollectionData] = useState()
-   const[mine, setmine] = useState()
    const [playListID, setplayListID] = useState()
    const [LikedPlaylist, setLikedPlaylist] = useState([])
 
