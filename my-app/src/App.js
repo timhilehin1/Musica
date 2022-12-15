@@ -226,6 +226,8 @@ function App() {
                                                AudioRef={AudioRef}
                                                PlayBtnRef={PlayBtnRef}
                                                PauseBtnRef={PauseBtnRef}
+                                               SetnewRelease={SetnewRelease}
+                                               SetPopular={SetPopular}
                                                />}/>
             </Route>
 

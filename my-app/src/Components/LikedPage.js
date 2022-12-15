@@ -6,58 +6,37 @@ import { BsFillPlayCircleFill} from "react-icons/bs"
 
 function LikedPage(prop){
 
-    const { AllSongs, SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular} = prop
+    const { AllSongs, SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular, SetnewRelease, SetPopular} = prop
 
     const [likeArray, setLikeArray] = useState([])
     const [reload, setReload] = useState()
 
-
-      let newLike = []
+      
+      let likedData= []
+      let unlikedArray = []
+      let updatedNewRelease = []
+      let updatedPopularData = []
 
       useEffect(()=>{
         for(let i=0; i<newRelease.length; i++){
             if(newRelease[i].like === true){
-              newLike.push(newRelease[i])
-              setLikeArray(newLike)
+              likedData.push(newRelease[i])
+              setLikeArray(likedData)
             }
+
         }
 
         for(let i = 0; i<popular.length; i++){
             if(popular[i].like === true){
-                newLike.push(popular[i])
-                setLikeArray(newLike)
+                likedData.push(popular[i])
+                setLikeArray(likedData)
             }
         }
-
-
-         console.log(likeArray)
-
 
       },[])
 
 let demoArray = []
-      useEffect(()=>{
-
-           for(let i = 0; i<likeArray.length; i++){
-               if(likeArray[i].like !== false){
-                 demoArray.push(likeArray[i])
-                 setLikeArray(demoArray)
-               }
-           }
-
-      },[])
-
-
-
-
-
-
-
-
-        // setReload(likeArray)  //don't really know what this guy is doing
-
-
-
+ 
 
 
     function handlePlaylistSong(index){
@@ -103,34 +82,70 @@ let demoArray = []
         AudioRef.current.load()
         AudioRef.current.play()
        }
-
-       let newArray = []
+        
+      
        function unlikeSong(id){
-
-
             likeArray.forEach((item)=>{
 
                 if(item.id === id){
                     const UpdatedObj = {
                         ...item,
-                        like: false
+                        like: !item.like
                     }
 
-                    newArray.push(UpdatedObj)
+                    unlikedArray.push(UpdatedObj)
                 }
 
-
-
                 else{
-                    newArray.push(item)
+                    likedData.push(item)
+                    }
+            })
+
+            setLikeArray(likedData)
+
+
+
+            SetnewRelease((prevData)=>{
+                prevData.forEach((item)=>{
+                   if(item.id === id){
+
+                        const updatedData = {
+                            ...item,
+                            like: !item.like
+                        }
+                        updatedNewRelease.push(updatedData)
                     }
 
+                    else{
+                       updatedNewRelease.push(item)
+                        }
+                })
 
+                return updatedNewRelease
+            })
 
+            SetPopular((prevData)=>{
+                prevData.forEach((item)=>{
+                    if(item.id === id){
+                        const updatedData = {
+                            ...item,
+                            like: !item.like
+                        }
+  
+                        updatedPopularData.push(updatedData)
+                    }
+  
+                    else{
+                        updatedPopularData.push(item)
+                    }
+  
+                })
+  
+                return updatedPopularData
             })
 
 
-             setLikeArray(newArray)
+             
 
        }
 
