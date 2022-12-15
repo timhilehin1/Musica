@@ -14,13 +14,13 @@ function PlaylistSongs(prop){
 
     return (
         <div className="song-cont">
-        <div className="songs mt-3 align-items-center w-100 p-2" onClick={prop.handlePlaylistSong}>
+        <div className="songs mt-3 align-items-center w-100 p-2" >
            <div className="d-flex align-items-center gap-1">
                <img className="song-img"  src={prop.cover}></img>
                 <MdOutlineFavoriteBorder className="menu d-none d-lg-block" onClick={prop.unlikeSong} style={{fontSize:"1.3rem"}}/>
            </div>
 
-           <div className="">
+           <div className="" onClick={prop.handlePlaylistSong}>
                {prop.title} ~ {prop.artist}
            </div>
 

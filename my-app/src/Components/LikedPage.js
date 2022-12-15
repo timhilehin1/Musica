@@ -6,38 +6,57 @@ import { BsFillPlayCircleFill} from "react-icons/bs"
 
 function LikedPage(prop){
 
-    const { SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular} = prop
+    const { AllSongs, SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular} = prop
 
     const [likeArray, setLikeArray] = useState([])
     const [reload, setReload] = useState()
 
-    useEffect(()=>{
 
+      let newLike = []
+
+      useEffect(()=>{
         for(let i=0; i<newRelease.length; i++){
             if(newRelease[i].like === true){
-              likeArray.push(newRelease[i])
-            }
-
-            else if(newRelease[i] === false){
-                likeArray.splice(i,1)
+              newLike.push(newRelease[i])
+              setLikeArray(newLike)
             }
         }
 
         for(let i = 0; i<popular.length; i++){
             if(popular[i].like === true){
-                likeArray.push(popular[i])
+                newLike.push(popular[i])
+                setLikeArray(newLike)
             }
-
-        else if(popular[i] === false){
-            likeArray.splice(i,1)
-        }
-
         }
 
 
-        setReload(likeArray)  //don't really know what this guy is doing
+         console.log(likeArray)
 
-    }, [likeArray])
+
+      },[])
+
+let demoArray = []
+      useEffect(()=>{
+
+           for(let i = 0; i<likeArray.length; i++){
+               if(likeArray[i].like !== false){
+                 demoArray.push(likeArray[i])
+                 setLikeArray(demoArray)
+               }
+           }
+
+      },[])
+
+
+
+
+
+
+
+
+        // setReload(likeArray)  //don't really know what this guy is doing
+
+
 
 
 
@@ -85,21 +104,34 @@ function LikedPage(prop){
         AudioRef.current.play()
        }
 
+       let newArray = []
        function unlikeSong(id){
-           setLikeArray((prevArray)=>{
-
-            for(let i = 0; i<prevArray.length; i++){
-                if(prevArray[i].id === id){
-                    prevArray.splice(i, 1)
-
-                         }
-            }
-            console.log(prevArray)
-            return prevArray
-           })
 
 
-           
+            likeArray.forEach((item)=>{
+
+                if(item.id === id){
+                    const UpdatedObj = {
+                        ...item,
+                        like: false
+                    }
+
+                    newArray.push(UpdatedObj)
+                }
+
+
+
+                else{
+                    newArray.push(item)
+                    }
+
+
+
+            })
+
+
+             setLikeArray(newArray)
+
        }
 
 
@@ -122,8 +154,6 @@ function LikedPage(prop){
              </>
         )
     })
-
-    // console.log(likedSongs)
 
 
     return (
