@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 
-function Searchbar(){
+function NavigationMobile(){
 
     const pathname = useLocation().pathname
     return (
@@ -21,7 +21,6 @@ function Searchbar(){
 
 <div  style={{width:"50%"}} class="offcanvas holder  bg-dark offcanvas-start " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    {/* <h5 class="offcanvas-title" id="offcanvasExampleLabel">NEW ARRIVALS</h5> */}
     <button type="button"  class="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
 
@@ -67,7 +66,7 @@ function Searchbar(){
                  <AiOutlineSearch style={{fontSize:"1.3rem"}}/>
             Search artists
              </div>
-              {/* <AiOutlineSearch className="" style={{fontSize:"1.3rem"}}/> */}
+          
         </div>
 
 
@@ -75,4 +74,4 @@ function Searchbar(){
 }
 
 
-export default Searchbar
+export default NavigationMobile

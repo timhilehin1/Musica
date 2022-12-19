@@ -1,22 +1,24 @@
-import {React,  useRef, useState, useEffect} from "react";
+import {React,  useState, useEffect} from "react";
 import PlaylistSongs from "./PlaylistSongs";
-import { Link, useLocation } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { BsFillPlayCircleFill} from "react-icons/bs"
 
-
+// let counter = 0
 function LikedPage(prop){
 
+    //  props drilling
     const { AllSongs, SetAllSongs, setCurrentSongIndex, PlayBtnRef, PauseBtnRef, AudioRef, SetRotate, newRelease,  popular, SetnewRelease, SetPopular} = prop
 
     const [likeArray, setLikeArray] = useState([])
-    const [reload, setReload] = useState()
 
-      
-      let likedData= []
+    //    counter++;
+       let likedData= []
       let unlikedArray = []
       let updatedNewRelease = []
       let updatedPopularData = []
 
+
+    //    loops true the newRelease section and the popularSongs section to check for songs that have been liked, if liked push to and array and set to state.
       useEffect(()=>{
         for(let i=0; i<newRelease.length; i++){
             if(newRelease[i].like === true){
@@ -35,12 +37,11 @@ function LikedPage(prop){
 
       },[])
 
-let demoArray = []
+
  
 
-
+      
     function handlePlaylistSong(index){
-        // console.log(index)
         SetAllSongs(likeArray)
         setCurrentSongIndex(index)
 
@@ -52,6 +53,7 @@ let demoArray = []
         SetRotate(false)
     }
 
+    //  Play All Songs in the library
     function handlePlayAll(){
         SetAllSongs(likeArray)
         setCurrentSongIndex(0)
@@ -61,6 +63,7 @@ let demoArray = []
         PauseBtnRef.current.style.display = "block"
         SetRotate(false)
 
+        // event listener listens for the end of every song and adds one to the index.
         AudioRef.current.addEventListener("ended", ()=>{
 
             setCurrentSongIndex((previndex)=>{
@@ -73,7 +76,7 @@ let demoArray = []
                 }
             })
 
-            setTimeout(playsongs, 2000)
+            setTimeout(playsongs, 1000)
 
         })
     }
@@ -84,6 +87,7 @@ let demoArray = []
        }
         
       
+    //    remove song from library
        function unlikeSong(id){
             likeArray.forEach((item)=>{
 
@@ -93,11 +97,11 @@ let demoArray = []
                         like: !item.like
                     }
 
-                    unlikedArray.push(UpdatedObj)
+                    unlikedArray.push(UpdatedObj) //this array is being discarded?, sets the like value to false.
                 }
 
                 else{
-                    likedData.push(item)
+                    console.log(item) 
                     }
             })
 
@@ -174,7 +178,7 @@ let demoArray = []
     return (
 
         <>
-
+{/* <h2>{counter}</h2> */}
 {likeArray.length <= 0   ?
 
 <div className="d-block"> <div className="mt-5  d-flex button-container gap-lg-5 gap-2">

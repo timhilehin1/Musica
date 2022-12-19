@@ -14,12 +14,14 @@ const [test, setTest] = useState()
 const [pageWidth, setPageWidth] = useState(getWindowSize())
 let colRef = useRef();
 
+let CollectionArray = []
 
 
 
 
 
 
+//  Functin returns width of the page
 function getWindowSize() {
   const {innerWidth} = window;
   return innerWidth
@@ -34,9 +36,9 @@ else if(pageWidth < 500 && colRef.current){
    colRef.current.style.display = "block"
 }
 
+
+// This useEffect function gets the width of the webpage and stores it in a statesetter function,then adds an eventlistener that listens for window resize.
 useEffect(()=>{
-
-
           function handleWindowResize(){
          setPageWidth(getWindowSize());
           }
@@ -49,28 +51,32 @@ useEffect(()=>{
         },[])
 
 
+
+        // checks if the playlist in homepage is liked. if its likes, gets pushed to an array else gets splced from the array(needs refactoring, visit likedpage for more clarity)
 useEffect(()=>{
 
         for(let i = 0; i<FinalPlaylist.length; i++){
             if(FinalPlaylist[i].like === false){
-           localArray.push(FinalPlaylist[i])
+             CollectionArray.push(FinalPlaylist[i])
+             setLocalArray(CollectionArray)
 
             }
             else if(FinalPlaylist[i] === true){
-             localArray.splice(i,1)
+             CollectionArray.splice(i,1)
+             setLocalArray(CollectionArray)
             }
 
         }
 
 
-        setTest(localArray)
+        // setTest(localArray)
     },[FinalPlaylist])
 
 
 
 
 
-
+//   deals with responsiveness issues
 function handleCollection(){
 
         if(pageWidth > 500){
@@ -84,7 +90,7 @@ function handleCollection(){
 
 
 
-
+//    onclick of any playlist that has been liked, set the id of the playlst to the state setter function. The ids carries letters, that's the reason for the substring.
 function handleCollectionPlaylist(id){
     SetPlaylistIndex(id.substr(9)-1)
 }
@@ -115,8 +121,8 @@ return (
 
 return (
 
+// Main Album pag, this page also contains navigation to the lked/library page.
      <>
-
      { localArray <= 0 ? <div className="d-block">
 
      <div className="mt-5  d-flex button-container gap-lg-5 gap-2">

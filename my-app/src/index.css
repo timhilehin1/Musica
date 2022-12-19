@@ -2,8 +2,6 @@
 body {
     margin: 0;
     font-family: 'Quicksand', sans-serif;
-    /* -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; */
     background-color: #1D2123;
     padding: 1.25rem;
     padding-bottom: 5rem;
@@ -22,16 +20,11 @@ code {
 }
 
 
-.header {
-    /* border: 1px solid white; */
-
-}
 
 .searchbar {
     color: rgba(255, 255, 255, 0.25);
     align-items: center;
     font-size: 0.875rem;
-    /* border: 1px solid white; */
 }
 
 .navigation-bar {
@@ -43,7 +36,6 @@ code {
     cursor: pointer;
     line-height: 3.2rem;
     box-sizing: border-box;
-    /* border: 1px solid white; */
 }
 
 .nav:hover{
@@ -140,13 +132,11 @@ code {
 
 
 .button-container {
-    /* border: 1px solid white; */
     width: 100%;
     font-size: 14px;
 }
 
 .liked-collection {
-    /* border: 1px solid white; */
     display: none;
 }
 
@@ -180,7 +170,6 @@ code {
     height: 4.3125rem;
     animation: rotate 3s linear infinite;
     animation-play-state: paused;
-    /* border-radius: 100px; */
 }
 
 .player-img.play {
@@ -201,8 +190,6 @@ code {
 
 .progress-bar {
     background-color: rgba(255, 255, 255, 0.04);
-
-    /* background-color: white; */
     height: 3px;
     border-radius: 10px;
     cursor: pointer;
@@ -227,9 +214,6 @@ code {
 }
 
 .Albumimg-cont {
-    /* object-fit: cover; */
-    /* width: 17.75rem ; */
-    /* border: 1px solid white; */
     height: 18rem;
     width: 100%;
 }
@@ -360,7 +344,6 @@ code {
     }
 
     .collectionDiv {
-        /* border: 1px solid red; */
         display: block;
     }
 

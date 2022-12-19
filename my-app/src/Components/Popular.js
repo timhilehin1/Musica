@@ -2,7 +2,7 @@ import {React, useState, useEffect, useRef} from "react";
 import PopularMusic from "./PopularMusic";
 
 function Popular(prop){
-    const{ newRelease, SetnewRelease, currentSongIndex, setCurrentSongIndex, popular, SetPopular, IdChecker,SetIdChecker, PlayBtnRef, PauseBtnRef, AudioRef, random, SetRandom, rotate,  SetRotate, AllSongs, SetAllSongs} = prop
+    const{  setCurrentSongIndex, popular, SetPopular, SetIdChecker, PlayBtnRef, PauseBtnRef, AudioRef,  SetRandom,   SetRotate,  SetAllSongs} = prop
 
        let PopularCard
     const AudioEl = useRef(null)
@@ -23,10 +23,10 @@ function Popular(prop){
 
         setCurrentSongIndex(index)
              SetRandom(id)
-            SetIdChecker(id.substr(0,7))
+            SetIdChecker(id.substr(0,7)) 
 
             if(id.substr(0,7)){
-                  SetAllSongs(popular)
+                  SetAllSongs(popular) //if id === popular, set array to popular
             }
 
     
@@ -73,9 +73,7 @@ function Popular(prop){
         })
     }
 
-    // function LoadSongs(){
 
-    // }
     return (
          <div className="mt-3 ms-lg-5 mt-lg-5">
          <h5>Popular in your area</h5>

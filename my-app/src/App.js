@@ -1,30 +1,20 @@
-
-import Searchbar from './Components/SearchBar';
+import NavigationMobile from './Components/NavigationMobile';
 import Sidebar from './Components/Sidebar';
 import Navigation from './Components/Navigation';
 import NewReleases from './Components/NewReleases';
 import Popular from './Components/Popular';
 import Player from './Components/Player';
-import {HashRouter as Router, Routes, useLocation,  Switch, Link, Redirect, Route} from 'react-router-dom';
+import {HashRouter as Router, Routes,  Route} from 'react-router-dom';
 import Album from './Components/Album';
 import {Outlet} from 'react-router';
 import { useState, useRef, useEffect } from 'react';
 import PlaylistPage from './Components/PlaylistPage';
 import LikedPage from './Components/LikedPage';
-// import { useLocation } from "react-router-dom";
 
 
 
 function App() {
-
-
-
-
-
-
-  const [color, changeColor] = useState("#282c34");
-
-
+  // general states declaration / props drilling
   const [popular, SetPopular] = useState([])
   const [newRelease, SetnewRelease] = useState([])
   const [PlaylistData, SetPlaylistData] = useState([])
@@ -35,58 +25,58 @@ function App() {
   const [AllSongs, SetAllSongs] = useState([])
   const [PlaylistIndex, SetPlaylistIndex] = useState(0)
    const [Plsongs, SetPlSongs] = useState([])
-   const [CollectionData, SetCollectionData] = useState()
    const [playListID, setplayListID] = useState()
    const [LikedPlaylist, setLikedPlaylist] = useState([])
 
 
-    const [FinalPlaylist, SetFinalPlaylist] = useState(JSON.parse(sessionStorage.getItem("data")) || [])
+    const [FinalPlaylist, SetFinalPlaylist] = useState(JSON.parse(sessionStorage.getItem("data")) || []) // storing liked songs in sessionstorage so they can be available on re-load.
 
 
+    
+
+    //Get requests to fetch data
   useEffect(()=>{
 
-    fetch('https://musica-api.up.railway.app/new')
+        fetch('https://musica-api.up.railway.app/new')
         .then(response => response.json())
         .then(response => SetnewRelease(response.map((item)=>{
           return {...item, like:false}
         })))
         .catch(err => console.error(err));
 
-        },[])
-
-
-        useEffect(()=>{
-
-          fetch('https://musica-api.up.railway.app/popular')
+        fetch('https://musica-api.up.railway.app/popular')
               .then(response => response.json())
               .then(response => SetPopular(response.map((item)=>{
                 return {...item, like:false}
               })))
               .catch(err => console.error(err));
 
-              },[])
+              fetch('https://musica-api.up.railway.app/playlist')
+              .then(response=>response.json())
+              .then(response=>SetPlaylistData(response))
+              .catch(error=>console.log(error))
+      
+
+        },[])
 
 
-              useEffect(()=>{
-                fetch('https://musica-api.up.railway.app/playlist')
-                .then(response=>response.json())
-                .then(response=>SetPlaylistData(response))
-                .catch(error=>console.log(error))
-              },[])
 
-
-      const PlayerRef = useRef()
+    //  global refs to get ids of element, similar to get element by Id, but this this it's a global declaration.
       const PlayBtnRef = useRef()
       const PauseBtnRef = useRef()
       const AudioRef = useRef()
       const ImageRef = useRef()
       const Appref = useRef()
 
+
+
+// Homepage of the Application
+
     function HomePage(){
         return (
 
             <>
-              <Searchbar/>
+              <NavigationMobile/>
               <div className='dashboard-page d-flex gap-5'>
 
         <Navigation/>
@@ -143,11 +133,11 @@ function App() {
     }
 
 
-
+// Navigation components will both mobile and desktop views
     function WithNav(){
         return (
             <div className='withNav'>
-              <Searchbar/>
+              <NavigationMobile/>
               <div className='dashboard-page d-flex gap-5'>
         <Navigation/>
         <Outlet/>
@@ -168,15 +158,13 @@ function App() {
 
 
           <Routes>
-
+            {/* Homepage with the Playlist Section which is named ad sidebar in this Context */}
            <Route element={<HomePage/>}>
            <Route  path="/"  element={<Sidebar
                                       PlaylistData={PlaylistData}
                                       SetPlaylistData={SetPlaylistData}
                                       PlaylistIndex={PlaylistIndex}
                                       SetPlaylistIndex={SetPlaylistIndex}
-                                      color={color}
-                                      changeColor={changeColor}
                                        FinalPlaylist= {FinalPlaylist}
                                        SetFinalPlaylist = {SetFinalPlaylist}
                                        playListID={ playListID}
@@ -185,6 +173,8 @@ function App() {
                                      />}/>
             </Route>
 
+
+            {/* Page containing liked Playlists/Albums */}
             <Route element={<WithNav/>}>
 
             <Route  path="/Album"  element={<Album
@@ -193,6 +183,8 @@ function App() {
                                              />}/>
             </Route>
 
+
+              {/* Route containing Playlists  */}
             <Route element={<WithNav/>}>
             <Route  path="/PlaylistPage"  element={<PlaylistPage
                                                       PlaylistData={PlaylistData}
@@ -216,6 +208,8 @@ function App() {
                                                       />}/>
             </Route>
 
+
+             {/* Page for the liked songs, similar to spotify library */}
             <Route element={<WithNav/>}>
             <Route path="/LikedPage" element={<LikedPage
                                                newRelease={newRelease}
@@ -235,6 +229,8 @@ function App() {
 
 
     </Routes>
+
+    {/* Footer Section which consists of the player bar in the bottom part of the webpage */}
     <div className='footer'>
     <Player
     newRelease={newRelease}

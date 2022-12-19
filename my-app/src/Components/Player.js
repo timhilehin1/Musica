@@ -1,10 +1,11 @@
-import {React,useEffect, useState, useRef} from "react";
+import {React, useState, useRef} from "react";
 import { BiShuffle, BiSkipPrevious, BiPlay, BiSkipNext, BiVolumeFull, BiPause} from "react-icons/bi"
 import { RiRepeatOneLine } from "react-icons/ri"
 
 
 
 function Player(prop){
+    //prop drilling
    const{currentSongIndex, setCurrentSongIndex, PlayBtnRef,PauseBtnRef, ImageRef, rotate, SetRotate, AudioRef,  AllSongs  } = prop
 
    const [repeat, SetRepeat] = useState(false)
@@ -22,6 +23,7 @@ function playSongs(){
     AudioRef.current.play()
    }
 
+     //deduct and reset id onclick of backwards button.
     function handlePrev(){
         if(currentSongIndex < 1){
            setCurrentSongIndex(AllSongs.length - 1)
@@ -77,6 +79,7 @@ function playSongs(){
     }
 
 
+    //add eventlistener that listens for end of each song and set a random number to the index of the array, play song after 1s.
    function handleShuffle(){
        setShuffle(!shuffle)
 
@@ -87,33 +90,19 @@ function playSongs(){
                 return Math.floor(Math.random() * AllSongs.length)
            })
 
-           setTimeout(playSongs, 2000)
+           setTimeout(playSongs, 1000)
 
           })
 
-          console.log(shuffle)
 
    }
 
-//    if(shuffle === true){
-//        AudioRef.current.removeEventListener("ended", ()=>{
-//         SetRotate(true)
-//        setCurrentSongIndex((previndex)=>{
-
-//             return Math.floor(Math.random() * AllSongs.length)
-//        })
-
-//        setTimeout(playSongs, 2000)
-
-//       } )
-//       console.log("removed")
-//    }
 
 
 
+   //toggle states for repeat, if true, set loop attribute to true and vice-versa.
    function handleRepeat(){
     SetRepeat(!repeat)
-
    }
 
 
@@ -121,37 +110,36 @@ function playSongs(){
    function handleUpdate(){
 
        const {duration, currentTime} = AudioRef.current
-       const progressPercent = (currentTime / duration) * 100
-    //    progressRef.current.style.width = `${progressPercent}%`
+       const progressPercent = (currentTime / duration) * 100 
        innerBar.current.style.width = `${progressPercent}%`
    }
 
    function SetProgress(e){
-    //    console.log(e.target)
-      const width = progressRef.current.clientWidth
+
+       const width = progressRef.current.clientWidth
        const ClickX = e.nativeEvent.offsetX
 
        const duration = AudioRef.current.duration
 
-       AudioRef.current.currentTime = (ClickX/width) * duration
+       AudioRef.current.currentTime = (ClickX/width) * duration //with this calculation, you can click on anywhere on the seekbar and play song
 
    }
 
    function VolumeProgress(e){
+//vlumes are in 0s and 1s
        const width = volumeProgressBar.current.clientWidth
        const ClickX = e.nativeEvent.offsetX
 
-       console.log(width)
-
-       const VolumeProgress = (ClickX/width) * 100
-       const Volume = (VolumeProgress)/100
+       const VolumeProgress = (ClickX/width) * 100 //smilar to the calculation in SetProgress
+       const Volume = (VolumeProgress)/100  //volumes are either 0s or 1s
 
 
-        innerVolumeBar.current.style.width = `${VolumeProgress}%`
-        AudioRef.current.volume = Volume
+        innerVolumeBar.current.style.width = `${VolumeProgress}%` //Sets volume width
+        AudioRef.current.volume = Volume 
 
    }
 
+    //keep track of audio to decide when the cover should be moving or not.
    if(AudioRef.current){
     AudioRef.current.addEventListener("ended", ()=>{
         SetRotate(true)
@@ -170,15 +158,14 @@ function playSongs(){
 
 
 
-
-
-    return (
+//player bar
+return (
         <>
         {/* <div className={AllSongs.length > 0 ? "d-block" : "d-none"}> */}
 {
 
 
-        <div className="w-100  p-2 d-flex justify-content-between align-items-center player">
+        <div className=" me-4  p-2 d-flex justify-content-between align-items-center player">
 
            <div className="d-flex">
                        <audio ref={AudioRef} loop={repeat ? true : false}   onTimeUpdate={handleUpdate}>

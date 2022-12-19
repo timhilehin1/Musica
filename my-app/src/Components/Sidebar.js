@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import {  React, useEffect} from "react";
 import RandB from './RandB.png';
 import Playlist from "./Playlist";
-import { BiTestTube } from "react-icons/bi";
-import { BsExclamationSquare } from "react-icons/bs";
-
-
-
 
 
 
 
 function Sidebar(prop){
-  const {PlaylistData, SetPlaylistData, SetPlaylistIndex, PlaylistIndex, color, changeColor, FinalPlaylist, SetFinalPlaylist,playListID, setplayListID } = prop
+  const {PlaylistData, SetPlaylistIndex, FinalPlaylist, SetFinalPlaylist, } = prop
 
 
 
@@ -41,7 +36,6 @@ useEffect(()=>{
 
 
   function handlePlaylist(id){
-    // console.log()
        SetPlaylistIndex(id.substr(9)-1)
   }
 
@@ -97,8 +91,6 @@ if(FinalPlaylist){
         title={item.title}
         info={item.info}
         handlePlaylist={()=>{handlePlaylist(item.id)}}
-        color={color}
-         changeColor={changeColor}
           handleLike={()=>handleLike(item.id)}
           like={item.like}
           />

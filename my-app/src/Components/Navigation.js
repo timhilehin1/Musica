@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiFillHome,  } from "react-icons/ai"
 import { FaUserAlt } from "react-icons/fa"
 import { IoLogOutSharp } from "react-icons/io5"
 import radioLogo from './radio.svg'
 import exploreLogo from './video-horizontal.svg'
 import { Link } from "react-router-dom";
-import { AiOutlineSearch,  AiOutlineMenu  } from "react-icons/ai"
-import { MdOutlineRadio, MdVideoLibrary } from "react-icons/md"
+import { MdVideoLibrary } from "react-icons/md"
 import { useLocation } from "react-router-dom";
 
 

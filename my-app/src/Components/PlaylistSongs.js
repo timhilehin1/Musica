@@ -5,13 +5,6 @@ import { BiDotsVerticalRounded} from "react-icons/bi"
 function PlaylistSongs(prop){
 
 
-
-
-
-
-
-// console.log(prop.duration)
-
     return (
         <div className="song-cont">
         <div className="songs mt-3 align-items-center w-100 p-2" >
@@ -25,7 +18,7 @@ function PlaylistSongs(prop){
            </div>
 
            <div className="">
-               {/* Mr Money with the Vibe */}
+    
            </div>
 
            <div className="d-none d-lg-block">

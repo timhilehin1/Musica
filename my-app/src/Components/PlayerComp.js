@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react';
+import React  from 'react';
 import { BiShuffle, BiSkipPrevious, BiPlay, BiSkipNext, BiVolumeFull} from "react-icons/bi"
 import { RiRepeatOneLine } from "react-icons/ri"
 import { AiOutlinePause } from "react-icons/ai"
@@ -6,7 +6,6 @@ import { AiOutlinePause } from "react-icons/ai"
 
 
 function PlayerComp(prop){
-    // console.log(prop.PlayerRef.current)
 
 return (
 <>
